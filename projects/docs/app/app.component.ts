@@ -1,4 +1,4 @@
-import { afterNextRender, AfterRenderPhase, Component, Directive, ElementRef, inject, Injectable } from '@angular/core';
+import { afterNextRender, Component, Directive, ElementRef, inject, Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
@@ -13,11 +13,11 @@ import { toggleTheme } from 'ngxtw';
 export class AppComponent {
   isHomePage = false;
   constructor(private readonly router: Router) {
-    afterNextRender(() => {
-      hljs.registerLanguage('xml', xml);
-      hljs.registerLanguage('json', json);
-      hljs.registerLanguage('ts', typescript);
-    }, { phase: AfterRenderPhase.Write });
+    afterNextRender({ write: () => {
+        hljs.registerLanguage('xml', xml);
+        hljs.registerLanguage('json', json);
+        hljs.registerLanguage('ts', typescript);
+    } }, );
 
     this.router.events.subscribe((x) => {
       if (x instanceof NavigationEnd) {

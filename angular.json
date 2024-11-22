@@ -27,6 +27,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "prerender": true,
             "outputPath": "dist/ngxtw-docs",
             "index": "projects/docs/index.html",
             "browser": "projects/docs/main.ts",

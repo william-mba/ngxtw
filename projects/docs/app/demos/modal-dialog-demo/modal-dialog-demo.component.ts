@@ -1,4 +1,4 @@
-import { afterNextRender, AfterRenderPhase, Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 import { MODAL_DIALOG_DEMO_SAMPLE } from './modal-dialog-demo.sample';
 
 @Component({
@@ -10,13 +10,13 @@ export class ModalDialogDemoComponent {
   sample = MODAL_DIALOG_DEMO_SAMPLE;
 
   constructor() {
-    afterNextRender(() => {
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }, 500);
-    }, { phase: AfterRenderPhase.Write })
+    afterNextRender({ write: () => {
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }, 500);
+    } }, )
   }
 }

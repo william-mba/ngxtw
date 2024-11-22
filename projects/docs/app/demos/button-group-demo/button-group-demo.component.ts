@@ -1,4 +1,4 @@
-import { afterNextRender, AfterRenderPhase, Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 import { BUTTON_GROUP_DEMO_SAMPLE } from './button-group-demo.sample';
 
 @Component({
@@ -9,13 +9,13 @@ export class ButtonGroupDemoComponent {
   sample = BUTTON_GROUP_DEMO_SAMPLE;
 
   constructor() {
-    afterNextRender(() => {
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }, 500);
-    }, { phase: AfterRenderPhase.Write })
+    afterNextRender({ write: () => {
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }, 500);
+    } }, )
   }
 }

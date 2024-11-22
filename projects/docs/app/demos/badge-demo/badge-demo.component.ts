@@ -1,4 +1,4 @@
-import { afterNextRender, AfterRenderPhase, Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 import { BADGE_DEMO_SAMPLE } from './badge-demo.sample';
 
 @Component({
@@ -8,13 +8,13 @@ import { BADGE_DEMO_SAMPLE } from './badge-demo.sample';
 export class BadgeDemoComponent {
   sample = BADGE_DEMO_SAMPLE;
   constructor() {
-    afterNextRender(() => {
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }, 500);
-    }, { phase: AfterRenderPhase.Write })
+    afterNextRender({ write: () => {
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }, 500);
+    } }, )
   }
 }

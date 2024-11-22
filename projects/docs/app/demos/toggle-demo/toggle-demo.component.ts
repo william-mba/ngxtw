@@ -1,4 +1,4 @@
-import { afterNextRender, AfterRenderPhase, Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 import { TOGGLE_DEMO_SAMPLE } from './toggle-demo.sample';
 
 @Component({
@@ -9,14 +9,14 @@ export class ToggleDemoComponent {
   sample = TOGGLE_DEMO_SAMPLE;
 
   constructor() {
-    afterNextRender(() => {
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }, 500);
-    }, { phase: AfterRenderPhase.Write })
+    afterNextRender({ write: () => {
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }, 500);
+    } }, )
   }
 
 }

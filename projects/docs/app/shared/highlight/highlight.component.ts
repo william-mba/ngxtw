@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { afterNextRender, AfterRenderPhase, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { afterNextRender, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import hljs from 'highlight.js/lib/core';
 
 @Component({
@@ -20,9 +20,9 @@ export class HighlightComponent {
   @ViewChild('highlight', { static: true, read: ElementRef }) codeElement!: ElementRef<HTMLElement>;
 
   constructor(element: ElementRef<HTMLElement>) {
-    afterNextRender(() => {
-      hljs.highlightElement(this.codeElement.nativeElement);
-      element.nativeElement.className = '';
-    }, { phase: AfterRenderPhase.Write });
+    afterNextRender({ write: () => {
+        hljs.highlightElement(this.codeElement.nativeElement);
+        element.nativeElement.className = '';
+    } }, );
   }
 }
